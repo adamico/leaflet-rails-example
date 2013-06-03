@@ -16,8 +16,8 @@ class Office < ActiveRecord::Base
     results = cm.geocoding.find([address1, city, country].join(", "))
     if results.found
       centroid = results.results[0].centroid
-      lat = centroid.lat
-      lon = centroid.lon
+      self.lat = centroid.lat
+      self.lon = centroid.lon
     end
   end
 end
