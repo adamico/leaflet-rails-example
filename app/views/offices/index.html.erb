@@ -1,0 +1,42 @@
+<h1>Listing offices</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Details</th>
+    <th>Address1</th>
+    <th>Address2</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Postal</th>
+    <th>Country</th>
+    <th colspan="2">Coordinates</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @offices.each do |office| %>
+  <%= content_tag :tr, class: "office", data: {latitude: (lat=office.lat), longitude: (lon=office.lon), name: office.name, details: office.details} do %>
+    <td><%= office.name %></td>
+    <td><%= office.details %></td>
+    <td><%= office.address1 %></td>
+    <td><%= office.address2 %></td>
+    <td><%= office.city %></td>
+    <td><%= office.state %></td>
+    <td><%= office.postal %></td>
+    <td><%= office.country %></td>
+    <td><%= lat %></td>
+    <td><%= lon %></td>
+    <td><%= link_to 'Show', office %></td>
+    <td><%= link_to 'Edit', edit_office_path(office) %></td>
+    <td><%= link_to 'Destroy', office, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <% end -%>
+<% end %>
+</table>
+
+<br />
+
+<div id="map" style="height: 360px" data-cloudmadekey="<%= ENV["CLOUDMADE_API_KEY"] %>"></div>
+
+<%= link_to 'New Office', new_office_path %>
